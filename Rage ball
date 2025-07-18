@@ -56,7 +56,7 @@ local rageSpamMode = false
 local ballDistance = 90
 local clickCooldown = 0.63
 local lastClick = 0
-local incrementDistanceEvery = 1
+local incrementDistanceEvery = 1.6
 local lastDistanceIncrease = tick()
 
 local playerDetectDistance = 12.5
