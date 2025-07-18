@@ -236,7 +236,7 @@ RunService.RenderStepped:Connect(function()
         end)
         if success and ballPath then
             createESP()
-            ballDistance = 38
+            ballDistance = 32
             playerDetectDistance = defaultPlayerDetectDistance
         end
         return
@@ -258,7 +258,7 @@ RunService.RenderStepped:Connect(function()
     if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then
         clickMiddle()
         if #nearbyPlayers >= 2 then
-            task.wait(0.000000000000000001)
+            task.wait(0.00001)
             clickMiddle()
         end
         return
