@@ -257,7 +257,7 @@ RunService.RenderStepped:Connect(function()
 
 	-- Rage Spam Mode Instantâneo
 	if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then
-		for i = 1, 3 do
+		for i = 10, 20 do
 			clickMiddle()
 		end
 		return
