@@ -59,9 +59,9 @@ local lastClick = 0
 local incrementDistanceEvery = 1.6
 local lastDistanceIncrease = tick()
 
-local playerDetectDistance = 12.5
-local defaultPlayerDetectDistance = 12.5
-local playerDistanceIncrement = 0.1
+local playerDetectDistance = 13.5
+local defaultPlayerDetectDistance = 13.5
+local playerDistanceIncrement = 0.2
 local lastPlayerDistanceIncrease = tick()
 
 -- 🎛️ Toggles e Slider
@@ -257,7 +257,7 @@ RunService.RenderStepped:Connect(function()
 
 	-- Rage Spam Mode Instantâneo
 	if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then
-		for i = 1, 10 do
+		for i = 1, 15 do
 			clickMiddle()
 		end
 		return
