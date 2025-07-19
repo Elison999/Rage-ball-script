@@ -10,35 +10,35 @@ local camera = workspace.CurrentCamera
 
 -- 🪟 Rayfield UI
 local Window = Rayfield:CreateWindow({
-    Name = "Rage Ball",
-    Icon = 0,
-    LoadingTitle = "Loading...",
-    LoadingSubtitle = "by darker9899",
-    ShowText = "Rayfield",
-    Theme = "cyan",
-    ToggleUIKeybind = "K",
-    DisableRayfieldPrompts = false,
-    DisableBuildWarnings = false,
-    ConfigurationSaving = {
-        Enabled = true,
-        FolderName = nil,
-        FileName = "Big Hub"
-    },
-    Discord = {
-        Enabled = false,
-        Invite = "noinvitelink",
-        RememberJoins = true
-    },
-    KeySystem = false,
-    KeySettings = {
-        Title = "Untitled",
-        Subtitle = "Key System",
-        Note = "No method of obtaining the key is provided",
-        FileName = "Key",
-        SaveKey = true,
-        GrabKeyFromSite = false,
-        Key = {"Hello"}
-    }
+	Name = "Rage Ball",
+	Icon = 0,
+	LoadingTitle = "Loading...",
+	LoadingSubtitle = "by darker9899",
+	ShowText = "Rayfield",
+	Theme = "cyan",
+	ToggleUIKeybind = "K",
+	DisableRayfieldPrompts = false,
+	DisableBuildWarnings = false,
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil,
+		FileName = "Big Hub"
+	},
+	Discord = {
+		Enabled = false,
+		Invite = "noinvitelink",
+		RememberJoins = true
+	},
+	KeySystem = false,
+	KeySettings = {
+		Title = "Untitled",
+		Subtitle = "Key System",
+		Note = "No method of obtaining the key is provided",
+		FileName = "Key",
+		SaveKey = true,
+		GrabKeyFromSite = false,
+		Key = {"Hello"}
+	}
 })
 
 local Tab = Window:CreateTab("Combat", 4483362458)
@@ -46,7 +46,7 @@ local Tab = Window:CreateTab("Combat", 4483362458)
 -- ⚙️ Variáveis gerais
 local ballPath = nil
 pcall(function()
-    ballPath = workspace:WaitForChild("GameObjects"):WaitForChild("Balls"):WaitForChild("Ball")
+	ballPath = workspace:WaitForChild("GameObjects"):WaitForChild("Balls"):WaitForChild("Ball")
 end)
 
 local esp = nil
@@ -66,27 +66,27 @@ local lastPlayerDistanceIncrease = tick()
 
 -- 🎛️ Toggles e Slider
 Tab:CreateToggle({
-    Name = "Auto Parry",
-    CurrentValue = false,
-    Flag = "BallESPSystem",
-    Callback = function(Value)
-        isEnabled = Value
-        if isEnabled and ballPath then
-            createESP()
-        elseif esp then
-            esp:Destroy()
-            esp = nil
-        end
-    end,
+	Name = "Auto Parry",
+	CurrentValue = false,
+	Flag = "BallESPSystem",
+	Callback = function(Value)
+		isEnabled = Value
+		if isEnabled and ballPath then
+			createESP()
+		elseif esp then
+			esp:Destroy()
+			esp = nil
+		end
+	end,
 })
 
 Tab:CreateToggle({
-    Name = "Rage Spam Mode",
-    CurrentValue = false,
-    Flag = "RageClickSpam",
-    Callback = function(Value)
-        rageSpamMode = Value
-    end,
+	Name = "Rage Spam Mode",
+	CurrentValue = false,
+	Flag = "RageClickSpam",
+	Callback = function(Value)
+		rageSpamMode = Value
+	end,
 })
 
 Tab:CreateSlider({
@@ -188,28 +188,28 @@ Tab:CreateToggle({
 
 -- ⚙️ Funções
 function createESP()
-    if not ballPath then return end
-    if esp then esp:Destroy() end
-    esp = Instance.new("BoxHandleAdornment")
-    esp.Size = Vector3.new(2, 2, 2)
-    esp.Color3 = Color3.new(1, 1, 1)
-    esp.Adornee = ballPath
-    esp.AlwaysOnTop = true
-    esp.ZIndex = 10
-    esp.Transparency = 0
-    esp.Name = "BallESP"
-    esp.Parent = ballPath
+	if not ballPath then return end
+	if esp then esp:Destroy() end
+	esp = Instance.new("BoxHandleAdornment")
+	esp.Size = Vector3.new(2, 2, 2)
+	esp.Color3 = Color3.new(1, 1, 1)
+	esp.Adornee = ballPath
+	esp.AlwaysOnTop = true
+	esp.ZIndex = 10
+	esp.Transparency = 0
+	esp.Name = "BallESP"
+	esp.Parent = ballPath
 end
 
 function isBallRed()
-    if not ballPath then return false end
-    local color = ballPath.BrickColor or ballPath.Color
-    return color.r > 0.8 and color.g < 0.2 and color.b < 0.2
+	if not ballPath then return false end
+	local color = ballPath.BrickColor or ballPath.Color
+	return color.r > 0.8 and color.g < 0.2 and color.b < 0.2
 end
 
 function clickMiddle()
-    VirtualInputManager:SendMouseButtonEvent(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2, 0, true, game, 0)
-    VirtualInputManager:SendMouseButtonEvent(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2, 0, false, game, 0)
+	VirtualInputManager:SendMouseButtonEvent(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2, 0, true, game, 0)
+	VirtualInputManager:SendMouseButtonEvent(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2, 0, false, game, 0)
 end
 
 function getNearbyPlayers()
@@ -228,56 +228,55 @@ end
 
 -- 🔁 Loop principal
 RunService.RenderStepped:Connect(function()
-    if not isEnabled then return end
+	if not isEnabled then return end
 
-    if not ballPath or not ballPath:IsDescendantOf(workspace) then
-        local success = pcall(function()
-            ballPath = workspace:WaitForChild("GameObjects"):WaitForChild("Balls"):WaitForChild("Ball", 5)
-        end)
-        if success and ballPath then
-            createESP()
-            ballDistance = 32
-            playerDetectDistance = defaultPlayerDetectDistance
-        end
-        return
-    end
+	if not ballPath or not ballPath:IsDescendantOf(workspace) then  
+		local success = pcall(function()  
+			ballPath = workspace:WaitForChild("GameObjects"):WaitForChild("Balls"):WaitForChild("Ball", 5)  
+		end)  
+		if success and ballPath then  
+			createESP()  
+			ballDistance = 32  
+			playerDetectDistance = defaultPlayerDetectDistance  
+		end  
+		return  
+	end  
 
-    if esp then
-        esp.Color3 = isBallRed() and Color3.new(1, 0, 0) or Color3.new(1, 1, 1)
-    end
+	if esp then  
+		esp.Color3 = isBallRed() and Color3.new(1, 0, 0) or Color3.new(1, 1, 1)  
+	end  
 
-    local char = localPlayer.Character
-    if not char or not char:FindFirstChild("HumanoidRootPart") then return end
+	local char = localPlayer.Character  
+	if not char or not char:FindFirstChild("HumanoidRootPart") then return end  
 
-    local distanceToBall = (char.HumanoidRootPart.Position - ballPath.Position).Magnitude
-    local nearbyPlayers = getNearbyPlayers()
-    local playerNear = #nearbyPlayers > 0
-    local ballRed = isBallRed()
-    local now = tick()
+	local distanceToBall = (char.HumanoidRootPart.Position - ballPath.Position).Magnitude  
+	local nearbyPlayers = getNearbyPlayers()  
+	local playerNear = #nearbyPlayers > 0  
+	local ballRed = isBallRed()  
+	local now = tick()  
 
-    if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then
-        clickMiddle()
-        if #nearbyPlayers >= 2 then
-            task.wait()
-            clickMiddle()
-        end
-        return
-    end
+	-- Rage Spam Mode Instantâneo
+	if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then
+		for i = 1, 3 do
+			clickMiddle()
+		end
+		return
+	end
 
-    clickCooldown = playerNear and (nearbyPlayers[1] and nearbyPlayers[1].distance <= 10 and 0 or 0) or 0.63
+	clickCooldown = playerNear and (nearbyPlayers[1] and nearbyPlayers[1].distance <= 10 and 0 or 0) or 0.63
 
-    if ballRed and distanceToBall <= ballDistance and now - lastClick >= clickCooldown then
-        clickMiddle()
-        lastClick = now
-    end
+	if ballRed and distanceToBall <= ballDistance and now - lastClick >= clickCooldown then  
+		clickMiddle()  
+		lastClick = now  
+	end  
 
-    if now - lastDistanceIncrease >= incrementDistanceEvery then
-        ballDistance += 1.25
-        lastDistanceIncrease = now
-    end
+	if now - lastDistanceIncrease >= incrementDistanceEvery then  
+		ballDistance += 1.25  
+		lastDistanceIncrease = now  
+	end  
 
-    if now - lastPlayerDistanceIncrease >= 1 then
-        playerDetectDistance += playerDistanceIncrement
-        lastPlayerDistanceIncrease = now
-    end
+	if now - lastPlayerDistanceIncrease >= 1 then  
+		playerDetectDistance += playerDistanceIncrement  
+		lastPlayerDistanceIncrease = now  
+	end
 end)
