@@ -56,12 +56,12 @@ local rageSpamMode = false
 local ballDistance = 90
 local clickCooldown = 0.63
 local lastClick = 0
-local incrementDistanceEvery = 1.6
+local incrementDistanceEvery = 1.35
 local lastDistanceIncrease = tick()
 
 local playerDetectDistance = 13.5
 local defaultPlayerDetectDistance = 13.5
-local playerDistanceIncrement = 0.2
+local playerDistanceIncrement = 0.4
 local lastPlayerDistanceIncrease = tick()
 
 -- 🎛️ Toggles e Slider
