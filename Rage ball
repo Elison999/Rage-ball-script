@@ -236,7 +236,7 @@ RunService.RenderStepped:Connect(function()
 		end)  
 		if success and ballPath then  
 			createESP()  
-			ballDistance = 36  
+			ballDistance = 33  
 			playerDetectDistance = defaultPlayerDetectDistance  
 		end  
 		return  
