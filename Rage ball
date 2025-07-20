@@ -81,7 +81,7 @@ Tab:CreateToggle({
 })
 
 Tab:CreateToggle({
-	Name = "Rage Spam Mode",
+	Name = "auto spam",
 	CurrentValue = false,
 	Flag = "RageClickSpam",
 	Callback = function(Value)
@@ -90,7 +90,7 @@ Tab:CreateToggle({
 })
 
 Tab:CreateSlider({
-	Name = "Player Detect Range",
+	Name = "auto spam distance",
 	Range = {12.5, 20},
 	Increment = 0.1,
 	Suffix = " studs",
@@ -257,7 +257,7 @@ RunService.RenderStepped:Connect(function()
 
 	-- Rage Spam Mode Instantâneo
 	if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then
-		for i = 1, 40 do
+		for i = 1, 15 do
 			clickMiddle()
 		end
 		return
