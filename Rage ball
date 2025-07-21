@@ -59,8 +59,8 @@ local lastClick = 0
 local incrementDistanceEvery = 1.35
 local lastDistanceIncrease = tick()
 
-local playerDetectDistance = 13.5
-local defaultPlayerDetectDistance = 13.5
+local playerDetectDistance = 9
+local defaultPlayerDetectDistance = 9
 local playerDistanceIncrement = 0.4
 local lastPlayerDistanceIncrease = tick()
 
@@ -91,7 +91,7 @@ end,
 
 Tab:CreateSlider({
 Name = "auto spam distance",
-Range = {12.5, 20},
+Range = {9, 20},
 Increment = 0.1,
 Suffix = " studs",
 CurrentValue = playerDetectDistance,
@@ -271,7 +271,7 @@ if ballRed and distanceToBall <= ballDistance and now - lastClick >= clickCooldo
 end    
 
 if now - lastDistanceIncrease >= incrementDistanceEvery then    
-	ballDistance += 1.5    
+	ballDistance += 1.2    
 	lastDistanceIncrease = now    
 end    
 
