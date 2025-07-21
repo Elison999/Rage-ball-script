@@ -1,4 +1,4 @@
--- 🧩 Importações
+ -- 🧩 Importações
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -10,35 +10,35 @@ local camera = workspace.CurrentCamera
 
 -- 🪟 Rayfield UI
 local Window = Rayfield:CreateWindow({
-	Name = "Rage Ball",
-	Icon = 0,
-	LoadingTitle = "Loading...",
-	LoadingSubtitle = "by darker9899",
-	ShowText = "Rayfield",
-	Theme = "cyan",
-	ToggleUIKeybind = "K",
-	DisableRayfieldPrompts = false,
-	DisableBuildWarnings = false,
-	ConfigurationSaving = {
-		Enabled = true,
-		FolderName = nil,
-		FileName = "Big Hub"
-	},
-	Discord = {
-		Enabled = false,
-		Invite = "noinvitelink",
-		RememberJoins = true
-	},
-	KeySystem = false,
-	KeySettings = {
-		Title = "Untitled",
-		Subtitle = "Key System",
-		Note = "No method of obtaining the key is provided",
-		FileName = "Key",
-		SaveKey = true,
-		GrabKeyFromSite = false,
-		Key = {"Hello"}
-	}
+Name = "Rage Ball",
+Icon = 0,
+LoadingTitle = "Loading...",
+LoadingSubtitle = "by darker9899",
+ShowText = "Rayfield",
+Theme = "cyan",
+ToggleUIKeybind = "K",
+DisableRayfieldPrompts = false,
+DisableBuildWarnings = false,
+ConfigurationSaving = {
+Enabled = true,
+FolderName = nil,
+FileName = "Big Hub"
+},
+Discord = {
+Enabled = false,
+Invite = "noinvitelink",
+RememberJoins = true
+},
+KeySystem = false,
+KeySettings = {
+Title = "Untitled",
+Subtitle = "Key System",
+Note = "No method of obtaining the key is provided",
+FileName = "Key",
+SaveKey = true,
+GrabKeyFromSite = false,
+Key = {"Hello"}
+}
 })
 
 local Tab = Window:CreateTab("Combat", 4483362458)
@@ -46,13 +46,12 @@ local Tab = Window:CreateTab("Combat", 4483362458)
 -- ⚙️ Variáveis gerais
 local ballPath = nil
 pcall(function()
-	ballPath = workspace:WaitForChild("GameObjects"):WaitForChild("Balls"):WaitForChild("Ball")
+ballPath = workspace:WaitForChild("GameObjects"):WaitForChild("Balls"):WaitForChild("Ball")
 end)
 
 local esp = nil
 local isEnabled = false
 local rageSpamMode = false
-local pingBased = false
 
 local ballDistance = 90
 local clickCooldown = 0.63
@@ -65,50 +64,41 @@ local defaultPlayerDetectDistance = 13.5
 local playerDistanceIncrement = 0.4
 local lastPlayerDistanceIncrease = tick()
 
--- 🎛️ UI: Toggles, Sliders
+-- 🎛️ Toggles e Slider
 Tab:CreateToggle({
-	Name = "Auto Parry",
-	CurrentValue = false,
-	Flag = "BallESPSystem",
-	Callback = function(Value)
-		isEnabled = Value
-		if isEnabled and ballPath then
-			createESP()
-		elseif esp then
-			esp:Destroy()
-			esp = nil
-		end
-	end,
+Name = "Auto Parry",
+CurrentValue = false,
+Flag = "BallESPSystem",
+Callback = function(Value)
+isEnabled = Value
+if isEnabled and ballPath then
+createESP()
+elseif esp then
+esp:Destroy()
+esp = nil
+end
+end,
 })
 
 Tab:CreateToggle({
-	Name = "auto spam",
-	CurrentValue = false,
-	Flag = "RageClickSpam",
-	Callback = function(Value)
-		rageSpamMode = Value
-	end,
+Name = "auto spam",
+CurrentValue = false,
+Flag = "RageClickSpam",
+Callback = function(Value)
+rageSpamMode = Value
+end,
 })
 
 Tab:CreateSlider({
-	Name = "auto spam distance",
-	Range = {12.5, 20},
-	Increment = 0.1,
-	Suffix = " studs",
-	CurrentValue = playerDetectDistance,
-	Flag = "PlayerDetectSlider",
-	Callback = function(Value)
-		playerDetectDistance = Value
-	end,
-})
-
-Tab:CreateToggle({
-	Name = "Ping Based Click",
-	CurrentValue = false,
-	Flag = "PingBasedMode",
-	Callback = function(Value)
-		pingBased = Value
-	end,
+Name = "auto spam distance",
+Range = {12.5, 20},
+Increment = 0.1,
+Suffix = " studs",
+CurrentValue = playerDetectDistance,
+Flag = "PlayerDetectSlider",
+Callback = function(Value)
+playerDetectDistance = Value
+end,
 })
 
 -- ✅ BOTÃO SPAM ESTILIZADO
@@ -156,142 +146,138 @@ label.Font = Enum.Font.GothamBold
 label.TextSize = 18
 
 RunService.RenderStepped:Connect(function()
-	if clicking then
-		VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
-		VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
-	end
+if clicking then
+VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+end
 end)
 
 button.MouseButton1Click:Connect(function()
-	clicking = not clicking
-	button.BackgroundColor3 = clicking and Color3.fromRGB(60, 220, 120) or Color3.fromRGB(240, 80, 80)
-	label.Text = clicking and "💖 Spam ON" or "🖐️ Spam OFF"
+clicking = not clicking
+button.BackgroundColor3 = clicking and Color3.fromRGB(60, 220, 120) or Color3.fromRGB(240, 80, 80)
+label.Text = clicking and "💖 Spam ON" or "🖐️ Spam OFF"
 end)
 
 button.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = true
-		dragOffset = Vector2.new(input.Position.X - button.AbsolutePosition.X, input.Position.Y - button.AbsolutePosition.Y)
-	end
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+dragging = true
+dragOffset = Vector2.new(input.Position.X - button.AbsolutePosition.X, input.Position.Y - button.AbsolutePosition.Y)
+end
 end)
 
 UserInputService.InputChanged:Connect(function(input)
-	if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-		button.Position = UDim2.new(0, input.Position.X - dragOffset.X, 0, input.Position.Y - dragOffset.Y)
-	end
+if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+button.Position = UDim2.new(0, input.Position.X - dragOffset.X, 0, input.Position.Y - dragOffset.Y)
+end
 end)
 
 UserInputService.InputEnded:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = false
-	end
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+dragging = false
+end
 end)
 
 Tab:CreateToggle({
-	Name = "Manual Spam Button",
-	CurrentValue = false,
-	Flag = "ShowManualSpamStylized",
-	Callback = function(Value)
-		gui.Enabled = Value
-	end,
+Name = "Manual Spam Button",
+CurrentValue = false,
+Flag = "ShowManualSpamStylized",
+Callback = function(Value)
+gui.Enabled = Value
+end,
 })
 
 -- ⚙️ Funções
 function createESP()
-	if not ballPath then return end
-	if esp then esp:Destroy() end
-	esp = Instance.new("BoxHandleAdornment")
-	esp.Size = Vector3.new(2, 2, 2)
-	esp.Color3 = Color3.new(1, 1, 1)
-	esp.Adornee = ballPath
-	esp.AlwaysOnTop = true
-	esp.ZIndex = 10
-	esp.Transparency = 0
-	esp.Name = "BallESP"
-	esp.Parent = ballPath
+if not ballPath then return end
+if esp then esp:Destroy() end
+esp = Instance.new("BoxHandleAdornment")
+esp.Size = Vector3.new(2, 2, 2)
+esp.Color3 = Color3.new(1, 1, 1)
+esp.Adornee = ballPath
+esp.AlwaysOnTop = true
+esp.ZIndex = 10
+esp.Transparency = 0
+esp.Name = "BallESP"
+esp.Parent = ballPath
 end
 
 function isBallRed()
-	if not ballPath then return false end
-	local color = ballPath.BrickColor or ballPath.Color
-	return color.r > 0.8 and color.g < 0.2 and color.b < 0.2
+if not ballPath then return false end
+local color = ballPath.BrickColor or ballPath.Color
+return color.r > 0.8 and color.g < 0.2 and color.b < 0.2
 end
 
 function clickMiddle()
-	VirtualInputManager:SendMouseButtonEvent(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2, 0, true, game, 0)
-	VirtualInputManager:SendMouseButtonEvent(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2, 0, false, game, 0)
+VirtualInputManager:SendMouseButtonEvent(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2, 0, true, game, 0)
+VirtualInputManager:SendMouseButtonEvent(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2, 0, false, game, 0)
 end
 
 function getNearbyPlayers()
-	local nearby = {}
-	for _, player in ipairs(Players:GetPlayers()) do
-		if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-			local dist = (player.Character.HumanoidRootPart.Position - ballPath.Position).Magnitude
-			if dist <= playerDetectDistance then
-				table.insert(nearby, {player = player, distance = dist})
-			end
-		end
-	end
-	table.sort(nearby, function(a, b) return a.distance < b.distance end)
-	return nearby
+local nearby = {}
+for _, player in ipairs(Players:GetPlayers()) do
+if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+local dist = (player.Character.HumanoidRootPart.Position - ballPath.Position).Magnitude
+if dist <= playerDetectDistance then
+table.insert(nearby, {player = player, distance = dist})
+end
+end
+end
+table.sort(nearby, function(a, b) return a.distance < b.distance end)
+return nearby
 end
 
 -- 🔁 Loop principal
 RunService.RenderStepped:Connect(function()
-	if not isEnabled then return end
+if not isEnabled then return end
 
-	if not ballPath or not ballPath:IsDescendantOf(workspace) then  
-		local success = pcall(function()  
-			ballPath = workspace:WaitForChild("GameObjects"):WaitForChild("Balls"):WaitForChild("Ball", 5)  
-		end)  
-		if success and ballPath then  
-			createESP()  
-			ballDistance = 33  
-			playerDetectDistance = defaultPlayerDetectDistance  
-		end  
-		return  
-	end  
+if not ballPath or not ballPath:IsDescendantOf(workspace) then    
+	local success = pcall(function()    
+		ballPath = workspace:WaitForChild("GameObjects"):WaitForChild("Balls"):WaitForChild("Ball", 5)    
+	end)    
+	if success and ballPath then    
+		createESP()    
+		ballDistance = 33    
+		playerDetectDistance = defaultPlayerDetectDistance    
+	end    
+	return    
+end    
 
-	if esp then  
-		esp.Color3 = isBallRed() and Color3.new(1, 0, 0) or Color3.new(1, 1, 1)  
-	end  
+if esp then    
+	esp.Color3 = isBallRed() and Color3.new(1, 0, 0) or Color3.new(1, 1, 1)    
+end    
 
-	local char = localPlayer.Character  
-	if not char or not char:FindFirstChild("HumanoidRootPart") then return end  
+local char = localPlayer.Character    
+if not char or not char:FindFirstChild("HumanoidRootPart") then return end    
 
-	local distanceToBall = (char.HumanoidRootPart.Position - ballPath.Position).Magnitude  
-	local nearbyPlayers = getNearbyPlayers()  
-	local playerNear = #nearbyPlayers > 0  
-	local ballRed = isBallRed()  
-	local now = tick()  
+local distanceToBall = (char.HumanoidRootPart.Position - ballPath.Position).Magnitude    
+local nearbyPlayers = getNearbyPlayers()    
+local playerNear = #nearbyPlayers > 0    
+local ballRed = isBallRed()    
+local now = tick()    
 
-	-- Rage Spam Mode Instantâneo
-	if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then
-		for i = 1, 10 do
-			clickMiddle()
-		end
-		return
-	end
-
-	if pingBased then
-		local ping = tonumber(string.match(game.Stats.Network.ServerStatsItem["Data Ping"]:GetValueString(), "%d+")) or 0
-		clickCooldown = ping / 1000
-	else
-		clickCooldown = playerNear and (nearbyPlayers[1] and nearbyPlayers[1].distance <= 10 and 0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 or 0.63) or 0.63
-	end
-
-	if ballRed and distanceToBall <= ballDistance and now - lastClick >= clickCooldown then  
+-- Rage Spam Mode Instantâneo  
+if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then  
+	for i = 1, 7 do  
 		clickMiddle()  
-		lastClick = now  
 	end  
+	return  
+end  
 
-	if now - lastDistanceIncrease >= incrementDistanceEvery then  
-		ballDistance += 1.5  
-		lastDistanceIncrease = now  
-	end  
+clickCooldown = playerNear and (nearbyPlayers[1] and nearbyPlayers[1].distance <= 10 and 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 or 0) or 0.63  
 
-	if now - lastPlayerDistanceIncrease >= 1 then  
-		playerDetectDistance += playerDistanceIncrement  
-		lastPlayerDistanceIncrease = now  
-	end
+if ballRed and distanceToBall <= ballDistance and now - lastClick >= clickCooldown then    
+	clickMiddle()    
+	lastClick = now    
+end    
+
+if now - lastDistanceIncrease >= incrementDistanceEvery then    
+	ballDistance += 1.5    
+	lastDistanceIncrease = now    
+end    
+
+if now - lastPlayerDistanceIncrease >= 1 then    
+	playerDetectDistance += playerDistanceIncrement    
+	lastPlayerDistanceIncrease = now    
+end
+
 end)
