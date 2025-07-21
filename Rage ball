@@ -263,7 +263,7 @@ if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance th
 	return  
 end  
 
-clickCooldown = playerNear and (nearbyPlayers[1] and nearbyPlayers[1].distance <= 10 and 0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 or 0) or 0.63  
+clickCooldown = playerNear and (nearbyPlayers[1] and nearbyPlayers[1].distance <= 10 and 0.00000000000000000000000000000000001 or 0) or 0.63  
 
 if ballRed and distanceToBall <= ballDistance and now - lastClick >= clickCooldown then    
 	clickMiddle()    
