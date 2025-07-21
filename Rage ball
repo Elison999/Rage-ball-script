@@ -236,7 +236,7 @@ if not ballPath or not ballPath:IsDescendantOf(workspace) then
 	end)    
 	if success and ballPath then    
 		createESP()    
-		ballDistance = 33    
+		ballDistance = 38    
 		playerDetectDistance = defaultPlayerDetectDistance    
 	end    
 	return    
@@ -257,7 +257,7 @@ local now = tick()
 
 -- Rage Spam Mode Instantâneo  
 if rageSpamMode and playerNear and ballRed and distanceToBall <= ballDistance then  
-	for i = 1, 7 do  
+	for i = 1, 2 do  
 		clickMiddle()  
 	end  
 	return  
