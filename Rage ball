@@ -271,7 +271,7 @@ RunService.RenderStepped:Connect(function()
 	end  
 
 	if now - lastDistanceIncrease >= incrementDistanceEvery then  
-		ballDistance += 1.25  
+		ballDistance += 1.5  
 		lastDistanceIncrease = now  
 	end  
 
