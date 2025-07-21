@@ -52,6 +52,7 @@ end)
 local esp = nil
 local isEnabled = false
 local rageSpamMode = false
+local pingBased = false
 
 local ballDistance = 90
 local clickCooldown = 0.63
@@ -64,7 +65,7 @@ local defaultPlayerDetectDistance = 13.5
 local playerDistanceIncrement = 0.4
 local lastPlayerDistanceIncrease = tick()
 
--- 🎛️ Toggles e Slider
+-- 🎛️ UI: Toggles, Sliders
 Tab:CreateToggle({
 	Name = "Auto Parry",
 	CurrentValue = false,
@@ -98,6 +99,15 @@ Tab:CreateSlider({
 	Flag = "PlayerDetectSlider",
 	Callback = function(Value)
 		playerDetectDistance = Value
+	end,
+})
+
+Tab:CreateToggle({
+	Name = "Ping Based Click",
+	CurrentValue = false,
+	Flag = "PingBasedMode",
+	Callback = function(Value)
+		pingBased = Value
 	end,
 })
 
@@ -263,7 +273,12 @@ RunService.RenderStepped:Connect(function()
 		return
 	end
 
-	clickCooldown = playerNear and (nearbyPlayers[1] and nearbyPlayers[1].distance <= 10 and 0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 or 0) or 0.63
+	if pingBased then
+		local ping = tonumber(string.match(game.Stats.Network.ServerStatsItem["Data Ping"]:GetValueString(), "%d+")) or 0
+		clickCooldown = ping / 1000
+	else
+		clickCooldown = playerNear and (nearbyPlayers[1] and nearbyPlayers[1].distance <= 10 and 0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 or 0.63) or 0.63
+	end
 
 	if ballRed and distanceToBall <= ballDistance and now - lastClick >= clickCooldown then  
 		clickMiddle()  
